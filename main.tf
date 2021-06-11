@@ -1,7 +1,16 @@
+# Save tfstate file in s3 bucket - uncomment and run terraform init  command
+# terraform {
+#   required_version = ">=0.12"
+#   backend "s3" {
+#     bucket = "myapp-bucket-for-tfstate" #bucket name in aws
+#     key    = "myapp-bucket-for-tfstate/state.tfstate"
+#     region = "us-east-2"
+#   }
+# }
+
 provider "aws" {
     region = "us-east-2"
 }
-
 
 resource "aws_vpc" "myapp_vpc" {
     cidr_block = var.vpc_cidr_block
@@ -27,6 +36,5 @@ module "myapp_webserver" {
     public_key_location = var.public_key_location
     instance_type = var.instance_type
     subnet_id = module.myapp_subnet.subnet.id
-    avail_zone = var.avail_zone
-    
+    avail_zone = var.avail_zone   
 }
